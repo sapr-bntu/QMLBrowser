@@ -42,64 +42,24 @@
 import QtQuick 1.0
 
 Item {
-    id: container
+    property alias image: icon.source
+    property variant action
 
-    property alias image: bg.source
-    property alias url: urlText.text
+    signal clicked
 
-    signal urlEntered(string url)
-    signal urlChanged
-    width: parent.height
-    height: parent.height
-    opacity: 1
-    visible: true
+    width: 40; height: parent.height
 
-    BorderImage {
-        id: bg; rotation: 180
-        x: 8; width: parent.width - 16; height: 30;
-        anchors.verticalCenter: parent.verticalCenter
-        border { left: 10; top: 10; right: 10; bottom: 10 }
+    Image {
+        id: icon; anchors.centerIn: parent
+        opacity: if (action != undefined) { action.enabled ? 1.0 : 0.4 } else 1
     }
 
-    Rectangle {
-        anchors.bottom: bg.bottom
-        x: 18
-        height: 4
-        color: "#63b1ed"
-        width: (bg.width) * webView.progress
-        opacity: webView.progress == 1.0 ? 0.0 : 1.0
-    }
-
-
-
-    TextInput {
-        id: urlText
-        horizontalAlignment: TextEdit.AlignLeft
-        font.pixelSize: 14;
-
-        onTextChanged: container.urlChanged()
-
-        Keys.onEscapePressed: {
-            urlText.text = webView.url
-            webView.focus = true
-        }
-
-        Keys.onEnterPressed: {
-            container.urlEntered(urlText.text)
-            webView.focus = true
-        }
-
-        Keys.onReturnPressed: {
-            container.urlEntered(urlText.text)
-            webView.focus = true
-        }
-
-        anchors {
-            left: parent.left
-            right: parent.right
-            leftMargin: 18
-            rightMargin: 18
-            verticalCenter: parent.verticalCenter
+    MouseArea {
+        anchors { fill: parent; topMargin: -10; bottomMargin: -10 }
+        onClicked: {
+            if (action != undefined)
+                action.trigger()
+            parent.clicked()
         }
     }
 }

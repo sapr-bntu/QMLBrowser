@@ -12,6 +12,7 @@ Flickable {
     property alias reload: webView.reload
     property alias forward: webView.forward
 
+
     id: flickable
     width: parent.width
     contentWidth: Math.max(parent.width,webView.width)
@@ -51,12 +52,10 @@ Flickable {
         preferredHeight: flickable.height
         contentsScale: 1
         onContentsSizeChanged: {
-            // zoom out
             contentsScale = Math.min(1,flickable.width / contentsSize.width)
         }
 
         onUrlChanged: {
-            // got to topleft
             flickable.contentX = 0
             flickable.contentY = 0
             if (url != null) { lineedit.editUrl = url.toString(); }

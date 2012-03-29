@@ -49,10 +49,8 @@ Item {
 
     signal urlEntered(string url)
     signal urlChanged
-    width: parent.height
-    height: parent.height
-    opacity: 1
-    visible: true
+
+    width: parent.height; height: parent.height
 
     BorderImage {
         id: bg; rotation: 180
@@ -63,14 +61,10 @@ Item {
 
     Rectangle {
         anchors.bottom: bg.bottom
-        x: 18
-        height: 4
-        color: "#63b1ed"
-        width: (bg.width) * webView.progress
+        x: 18; height: 4; color: "#63b1ed"
+        width: (bg.width - 20) * webView.progress
         opacity: webView.progress == 1.0 ? 0.0 : 1.0
     }
-
-
 
     TextInput {
         id: urlText
@@ -95,10 +89,7 @@ Item {
         }
 
         anchors {
-            left: parent.left
-            right: parent.right
-            leftMargin: 18
-            rightMargin: 18
+            left: parent.left; right: parent.right; leftMargin: 18; rightMargin: 18
             verticalCenter: parent.verticalCenter
         }
     }

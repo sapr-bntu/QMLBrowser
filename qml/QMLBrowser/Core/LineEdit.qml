@@ -8,6 +8,17 @@ Image {
     property alias editUrl: urlInput.url
     property bool urlChanged: false
 
+    x: webView.contentX < 0 ? -webView.contentX : webView.contentX > webView.contentWidth-webView.width
+              ? -webView.contentX+webView.contentWidth-webView.width : 0
+    y: {
+               if (webView.progress < 1.0)
+                   return 0;
+               else {
+                   webView.contentY < 0 ? -webView.contentY : webView.contentY > webView.height
+               ? -webView.height : -webView.contentY
+               }
+           }
+
     Column {
         width: parent.width
 
@@ -25,6 +36,7 @@ Image {
         }
 
         Item {
+            id: item1
             width: parent.width
             height: 40
 
@@ -47,12 +59,11 @@ Image {
                 id: urlInput
                 x: 88
                 y: 0
-                width: 10
                 height: 40
+                anchors.right: parent.right
+                anchors.rightMargin: 99
                 anchors.leftMargin: 20
-                anchors.rightMargin: 0
                 anchors { left: nextButton.right
-                    right: reloadButton.left
                 }
                 image: "img/display.png"
                 onUrlEntered: {
@@ -65,9 +76,12 @@ Image {
 
             Button {
                 id: reloadButton
-                x: -161
+                x: 619
                 y: 0
-                anchors { right: quitButton.left; rightMargin: 61 }
+                width: 33
+                height: 40
+                anchors.right: parent.right
+                anchors.rightMargin: 66
                 action: webView.reload
                 image: "img/update4.bmp"
             }
@@ -87,14 +101,19 @@ Image {
 
             Button {
                 id: stopButton
-                x: -121
                 y: 0
+                height: 40
+                anchors.right: parent.right
+                anchors.rightMargin: 48
+                anchors.left: reloadButton.right
+                anchors.leftMargin: 18
                 opacity: 1
-                anchors { right: quitButton.left; rightMargin: 21 }
                 action: webView.stop
                 image: "img/x.bmp"
 
             }
+
         }
     }
 }
+
