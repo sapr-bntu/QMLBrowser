@@ -28,23 +28,6 @@ Browser::Browser(QWidget *parent) :
     connect(trIcon,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(showHide(QSystemTrayIcon::ActivationReason)));
 
 
-  /*  QMenu *help = new QMenu(this);
-
-    action = new QAction("&About...", this);
-    action->setShortcut(tr("F1"));
-    connect(action, SIGNAL(triggered()), this, SLOT(helpAbout()));
-    help->addAction(action);
-
-    action = new QAction("&About Qt...", this);
-    connect(action, SIGNAL(triggered()), this, SLOT(helpAboutQt()));
-    help->addAction(action);
-
-
-    menuBar()->addMenu(help)->setText("&Help");
-
-    */
-
-
 
     this->showMaximized();
     this->on_lineEdit_returnPressed();
