@@ -28,6 +28,23 @@ Browser::Browser(QWidget *parent) :
     connect(trIcon,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(showHide(QSystemTrayIcon::ActivationReason)));
 
 
+  /*  QMenu *help = new QMenu(this);
+
+    action = new QAction("&About...", this);
+    action->setShortcut(tr("F1"));
+    connect(action, SIGNAL(triggered()), this, SLOT(helpAbout()));
+    help->addAction(action);
+
+    action = new QAction("&About Qt...", this);
+    connect(action, SIGNAL(triggered()), this, SLOT(helpAboutQt()));
+    help->addAction(action);
+
+
+    menuBar()->addMenu(help)->setText("&Help");
+
+    */
+
+
 
     this->showMaximized();
     this->on_lineEdit_returnPressed();
@@ -65,12 +82,6 @@ Browser::~Browser()
 //    delete trIcon;
     delete ui;
 }
-
-
-
-
-
-
 
 bool Browser::UrlWithoutDomen(QString str)
 {
@@ -121,29 +132,7 @@ bool Browser::ComboboxClear()
     return true;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-void Browser::on_lineEdit_returnPressed()
-{
-    url_str = this->ui->lineEdit->text();
-    if (!url_str.startsWith("http://")){
-    url_str = "http://" + url_str;
-    }
-    QUrl url(url_str);
-    this->ui->webView->load(url);
-}
-bool Browser::on_lineEdit_returnPressedCheck()
+bool Browser::on_lineEdit_returnPressed()
 {
     try {
         url_str = this->ui->lineEdit->text();
@@ -175,12 +164,7 @@ void Browser::showHide(QSystemTrayIcon::ActivationReason r)
 }
 }
 
-
-void Browser::on_pushButton_clicked()
-{
-//    ui->lineEdit->setText(url_str);
-}
-bool Browser::on_pushButton_clickedCheck()
+bool Browser::on_pushButton_clicked()
 {
     try {
         //    ui->lineEdit->setText(url_str);
@@ -188,6 +172,7 @@ bool Browser::on_pushButton_clickedCheck()
     } catch (...) {
         return false;
     }
+   return true;
 
 }
 
@@ -251,11 +236,6 @@ bool Browser::on_comboBox_activatedCheck(QString fff)
 
 bool Browser::exitBrowser()
  {
-    QApplication::exit();
-    return true;
- }
-bool Browser::exitBrowserCheck()
- {
     try {
         QApplication::exit();
         return true;
@@ -279,6 +259,7 @@ bool Browser::TrayBrowserCheck()
     }
 
  }
+
 void Browser::changeEvent(QEvent *e)
 {
         if (e->type() == QEvent::WindowStateChange && isMinimized())
@@ -344,28 +325,28 @@ bool Browser::OpenCheck()
 }
 
 
-void Browser::save()
+//void Browser::save()
+// {
+//    QString fileName = QFileDialog::getSaveFileName(this,"","","HTML Страница(*.html)");
+//     if (!fileName.isEmpty()) {
+//         // save to file
+//         QFile file(fileName);
+
+//         if (!file.open(QIODevice::WriteOnly)) {
+//             QMessageBox::information(this, tr("Unable to open file"),
+//                 file.errorString());
+//             return;
+//         }
+
+//         QTextStream in(&file);
+//         in << ui->webView->page()->mainFrame()->toHtml();
+//         file.close();
+//     }
+// }
+
+bool Browser::save()
  {
-    QString fileName = QFileDialog::getSaveFileName(this,"","","HTML Страница(*.html)");
-     if (!fileName.isEmpty()) {
-         // save to file
-         QFile file(fileName);
 
-         if (!file.open(QIODevice::WriteOnly)) {
-             QMessageBox::information(this, tr("Unable to open file"),
-                 file.errorString());
-             return;
-         }
-
-         QTextStream in(&file);
-         in << ui->webView->page()->mainFrame()->toHtml();
-         file.close();
-     }
- }
-
-bool Browser::saveCheck()
- {
-    try {
         QString fileName = QFileDialog::getSaveFileName(this,"","","HTML Страница(*.html)");
          if (!fileName.isEmpty()) {
              // save to file
@@ -381,11 +362,8 @@ bool Browser::saveCheck()
              in << ui->webView->page()->mainFrame()->toHtml();
              file.close();
          }
-         return true;
-    } catch (...) {
-        return false;
-    }
 
+return true;
  }
 
 

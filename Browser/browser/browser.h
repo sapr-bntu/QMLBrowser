@@ -32,9 +32,9 @@ public:
 public slots:
     void on_comboBox_activated(QString );
     void on_lineEdit_textChanged(QString );
-    void on_lineEdit_returnPressed();
+    bool on_lineEdit_returnPressed();
     void showHide(QSystemTrayIcon::ActivationReason);
-    void on_pushButton_clicked();
+    bool on_pushButton_clicked();
     void linkchange(const QUrl & url);
     bool exitBrowser();
     void TrayBrowser();
@@ -42,7 +42,7 @@ public slots:
     void helpAboutQt();
     void changeEvent(QEvent* );
     void Open();
-    void save();
+    bool save();
     bool UrlWithoutDomen(QString str);
     bool UrlWithDomen(QString str);
     bool UrlWithoutHTTP(QString str);
@@ -51,14 +51,14 @@ public slots:
 
     bool on_comboBox_activatedCheck(QString );
     bool on_lineEdit_textChangedCheck(QString );
-    bool on_lineEdit_returnPressedCheck();
-    bool on_pushButton_clickedCheck();
-    bool exitBrowserCheck();
+    //bool on_lineEdit_returnPressedCheck();
+    //bool on_pushButton_clickedCheck();
+    //bool exitBrowserCheck();
     bool TrayBrowserCheck();
     bool helpAboutCheck();
     bool helpAboutQtCheck();
     bool OpenCheck();
-    bool saveCheck();
+    //bool saveCheck();
 };
 
 

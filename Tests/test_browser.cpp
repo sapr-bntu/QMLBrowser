@@ -22,10 +22,12 @@ private Q_SLOTS:
     void UrlWithoutHTTPTest();
     void UrlWithHTTPTest();
     void ComboboxClearTest();
+    void saveCheck();
+    void on_pushButton_clickedCheck();
 
 
 };
-//
+
 TestBrowser::TestBrowser()
 {
 }
@@ -41,21 +43,21 @@ void TestBrowser::cleanupTestCase()
 void TestBrowser::on_lineEdit_returnPressedCheckTest()
 {
    Browser br;
-   bool flag=br.on_lineEdit_returnPressedCheck();
+   bool flag=br.on_lineEdit_returnPressed();
    QCOMPARE(true, flag);
 }
 
 void TestBrowser::exitBrowserCheckTest()
 {
    Browser br;
-   bool flag=br.exitBrowserCheck();
+   bool flag=br.exitBrowser();
    QCOMPARE(true, flag);
 }
 
-void TestBrowser::on_pushButton_clickedCheckTest()
+void TestBrowser::on_pushButton_clickedCheck()
 {
    Browser br;
-   bool flag=br.on_pushButton_clickedCheck();
+   bool flag=br.on_pushButton_clicked();
    QCOMPARE(true, flag);
 }
 
@@ -96,6 +98,13 @@ void TestBrowser::ComboboxClearTest()
 {
     Browser br;
     bool flag=br.ComboboxClear();
+    QCOMPARE(true, flag);
+}
+
+void TestBrowser::saveCheck()
+{
+    Browser br;
+    bool flag=br.save();
     QCOMPARE(true, flag);
 }
 
